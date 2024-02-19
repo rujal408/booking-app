@@ -1,15 +1,18 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import Routes from "./routes";
 
 class App {
   public app: express.Application;
   public port: number | undefined;
+  public routes: Routes;
 
   constructor() {
     dotenv.config();
     this.app = express();
     this.connectDB();
+    this.routes = new Routes(this.app); // Initialize the routes property
   }
 
   connectDB() {
