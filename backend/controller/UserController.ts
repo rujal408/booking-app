@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../model/User";
+import { SECRET_KEY } from "../constants/common";
 
-const SECRET_KEY = "sjdflksdjfl";
 
 class UserController {
   protected async createUser(req: Request, res: Response, next: NextFunction) {
