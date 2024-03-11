@@ -14,8 +14,8 @@ class BookingRoutes extends BookingController {
 
   private initializeRoutes() {
     this.router.use(authMiddleWare);
-    this.router.post(`${this.path}/login`, this.bookPlace);
-    this.router.get(`${this.path}/login`, this.getBookedList);
+    this.router.post(`${this.path}`, this.bookPlace);
+    this.router.get(`${this.path}/list`, this.getBookedList);
   }
 }
 
