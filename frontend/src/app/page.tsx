@@ -1,11 +1,16 @@
-"use client"
+"use client";
 
-import React from 'react'
+import LoginContainer from "@/container/LoginContainer";
+import CreateUserContainer from "@/container/CreateUserContainer";
 
-const Login = () => {
+import React from "react";
+
+const User = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <div className="user-form">
+      <LoginContainer />
+    </div>
+  );
+};
 
-export default Login
+export default User;
