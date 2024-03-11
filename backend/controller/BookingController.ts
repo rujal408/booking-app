@@ -1,10 +1,5 @@
 import { Request, Response } from "express";
-import {
-  convertToFormat,
-  getDateRange,
-  setToEndOfDay,
-  setToStartOfDay,
-} from "../utils/dates";
+
 import Booking from "../model/Booking";
 
 class BookingController {
