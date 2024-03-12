@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import User from "../model/User";
 import { SECRET_KEY } from "../constants/common";
 
-
 class UserController {
   protected async createUser(req: Request, res: Response, next: NextFunction) {
     try {
@@ -13,7 +12,7 @@ class UserController {
       const existingUser = await User.findOne({ email: email });
 
       if (existingUser) {
-        return res.status(401).json({ message: "" });
+        return res.status(401).json({ message: "User already exists !" });
       }
 
       bcrypt.hash(password, 10, async (_, hash) => {

@@ -13,6 +13,7 @@ class UserRoutes extends UserController{
 
       private initializeRoutes() {
         this.router.post(`${this.path}/login`, this.loginUser);
+        this.router.post(`${this.path}/create`, this.createUser);
       }
 }
 
