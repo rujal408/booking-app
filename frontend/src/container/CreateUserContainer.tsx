@@ -11,7 +11,24 @@ const LoginContainer = () => {
       email: "",
       password: "",
     },
-    
+    validations: {
+      name: {
+        required: true,
+        message: "Provide name",
+      },
+      username: {
+        required: true,
+        message: "Provide username",
+      },
+      email: {
+        required: true,
+        message: "Provide email",
+      },
+      password: {
+        required: true,
+        message: "Provide password",
+      },
+    },
   });
 
   const onSubmit = (data: any) => {};
