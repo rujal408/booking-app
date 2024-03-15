@@ -4,17 +4,29 @@ import useForm from "@/hooks/useForm";
 import React from "react";
 
 const LoginContainer = () => {
-  const { handleChange, handleSubmit } = useForm({
+  const { handleChange, handleSubmit, ref, errors } = useForm({
     defaultValue: {
       username: "",
       password: "",
     },
     validations: {
       username: (val) => {
-        return "";
+        return {
+          required: false,
+          message: "Need Username",
+          // validate: () => {
+          //   return false;
+          // },
+        };
       },
       password: (val) => {
-        return "";
+        return {
+          required: false,
+          message: "Need Password",
+          // validate: () => {
+          //   return false;
+          // },
+        };
       },
     },
   });
@@ -24,25 +36,17 @@ const LoginContainer = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
+    <form ref={ref} onSubmit={handleSubmit(handleLogin)}>
       <h3>Login Here</h3>
       <label>Username</label>
-      <input
-        name="username"
-        onChange={handleChange}
-        placeholder="Username"
-        id="username"
-      />
-
+      <input name="username" onChange={handleChange} placeholder="Username" />
       <label>Password</label>
       <input
         name="password"
         onChange={handleChange}
         type="password"
         placeholder="Password"
-        id="password"
       />
-
       <button>Log In</button>
     </form>
   );
