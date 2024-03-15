@@ -23,7 +23,7 @@ interface UseFormProps<T> {
   validations?: Validations<T>;
 }
 
-type DataType = string | number | boolean | object;
+type DataType = string | number | boolean | null | undefined | object;
 
 const useForm = <T extends Record<string, DataType>>(
   props?: UseFormProps<T>
