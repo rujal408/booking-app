@@ -10,10 +10,8 @@ function validate<T>(
       Object.keys(validations).forEach((validate) => {
         const fieldName = validate as keyof T;
         const value = inputs[fieldName];
-        const criteria = validations[fieldName];
-        if (criteria) {
-          const validationCriteria = criteria(value);
-
+        const validationCriteria = validations[fieldName];
+        if (validationCriteria) {
           if (validationCriteria?.required) {
             if (!value) {
               Object.assign(errors, {
@@ -21,7 +19,7 @@ function validate<T>(
               });
             }
           } else if (validationCriteria?.validate) {
-            const isValid = validationCriteria.validate();
+            const isValid = validationCriteria.validate(inputs[fieldName]);
             if (!isValid) {
               Object.assign(errors, {
                 [fieldName]: "",

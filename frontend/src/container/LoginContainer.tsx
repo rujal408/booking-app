@@ -12,23 +12,19 @@ const LoginContainer = () => {
       password: "",
     },
     validations: {
-      username: (val) => {
-        return {
-          required: true,
-          message: "Provide Username",
-          // validate: () => {
-          //   return false;
-          // },
-        };
+      username: {
+        required: true,
+        message: "Provide Username",
+        // validate: (val) => {
+        //   return false;
+        // },
       },
-      password: (val) => {
-        return {
-          required: true,
-          message: "Provide Password",
-          // validate: () => {
-          //   return false;
-          // },
-        };
+      password: {
+        required: true,
+        message: "Provide Password",
+        // validate: (val) => {
+        //   return false;
+        // },
       },
     },
   });

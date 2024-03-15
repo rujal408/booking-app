@@ -1,31 +1,54 @@
 "use client";
 
+import useForm from "@/hooks/useForm";
 import React from "react";
 
 const LoginContainer = () => {
-  const handleSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
+  const { handleChange, handleSubmit, ref, errors } = useForm({
+    defaultValue: {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+    },
+    
+  });
+
+  const onSubmit = (data: any) => {};
 
   return (
-    <form onSubmit={handleSignUp}>
+    <form ref={ref} onSubmit={handleSubmit(onSubmit)}>
       <h3>SignUp Here</h3>
-
       <label>Name</label>
-      <input name="name" type="text" placeholder="name" id="name" />
+      <input
+        name="name"
+        type="text"
+        placeholder="name"
+        onChange={handleChange}
+      />
 
       <label>Username</label>
-      <input name="username" type="text" placeholder="Username" id="username" />
+      <input
+        name="username"
+        type="text"
+        placeholder="Username"
+        onChange={handleChange}
+      />
 
       <label>Email</label>
-      <input name="email" type="email" placeholder="Email" id="email" />
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        onChange={handleChange}
+      />
 
       <label>Password</label>
       <input
         name="password"
         type="password"
         placeholder="Password"
-        id="password"
+        onChange={handleChange}
       />
 
       <button>Log In</button>

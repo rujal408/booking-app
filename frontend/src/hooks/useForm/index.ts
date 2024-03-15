@@ -8,10 +8,10 @@ export type FormErrors<T> = {
   [key in keyof T]?: string;
 };
 
-type ValidationFunction<T> = (value: T) => {
+type ValidationFunction<T> = {
   required?: boolean;
   message?: string;
-  validate?: () => boolean;
+  validate?: (value: T) => boolean;
 };
 
 export type Validations<T> = {
