@@ -4,9 +4,9 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import useSubscribe from "./useSubscribe";
 import validate from "./validate";
 
-export interface FormErrors {
-  [key: string]: string;
-}
+export type FormErrors<T> = {
+  [key in keyof T]?: string;
+};
 
 type ValidationFunction<T> = (value: T) => {
   required?: boolean;
@@ -15,7 +15,7 @@ type ValidationFunction<T> = (value: T) => {
 };
 
 export type Validations<T> = {
-  [key in keyof T]: ValidationFunction<T[key]>;
+  [key in keyof T]?: ValidationFunction<T[key]>;
 };
 
 interface UseFormProps<T> {
@@ -23,9 +23,9 @@ interface UseFormProps<T> {
   validations?: Validations<T>;
 }
 
-const useForm = <T>(props?: UseFormProps<T>) => {
-  const [formData, setFormData] = useState<any>(props?.defaultValue || {});
-  const [errors, setErrors] = useState<FormErrors>({});
+const useForm = <T extends Record<string, any>>(props?: UseFormProps<T>) => {
+  const [formData, setFormData] = useState<T>((props?.defaultValue as T) || {});
+  const [errors, setErrors] = useState<FormErrors<T>>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const ref = useSubscribe(props?.defaultValue || {}, setFormData);
@@ -33,13 +33,13 @@ const useForm = <T>(props?: UseFormProps<T>) => {
   const handleValidate = (data: any, call?: CallableFunction) =>
     validate<T>(data, props?.validations)
       .then((res) => {
-        setErrors(res.errors as FormErrors);
+        setErrors(res.errors as FormErrors<T>);
         if (call) {
           call();
         }
       })
       .catch((e) => {
-        setErrors(e.errors as FormErrors);
+        setErrors(e.errors as FormErrors<T>);
       });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

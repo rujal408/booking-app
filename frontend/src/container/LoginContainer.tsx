@@ -3,8 +3,10 @@
 import useForm from "@/hooks/useForm";
 import React from "react";
 
+type ILogin = { username: string; password: string };
+
 const LoginContainer = () => {
-  const { handleChange, handleSubmit, ref, errors } = useForm({
+  const { handleChange, handleSubmit, ref, errors } = useForm<ILogin>({
     defaultValue: {
       username: "",
       password: "",
@@ -31,7 +33,7 @@ const LoginContainer = () => {
     },
   });
 
-  const handleLogin = (data: any) => {
+  const handleLogin = (data:ILogin) => {
     console.log(data);
   };
 
