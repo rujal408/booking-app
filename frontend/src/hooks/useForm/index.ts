@@ -34,7 +34,7 @@ const useForm = <T extends Record<string, DataType>>(
 
   const ref = useSubscribe(props?.defaultValue || {}, setFormData);
 
-  const handleValidate = (data: any, call?: CallableFunction) =>
+  const handleValidate = (data: T, call?: CallableFunction) =>
     validate<T>(data, props?.validations)
       .then((res) => {
         setErrors(res.errors as FormErrors<T>);
@@ -57,7 +57,7 @@ const useForm = <T extends Record<string, DataType>>(
   };
 
   const handleSubmit = (onSubmit: (data: T) => void) => {
-    return async (e: FormEvent) => {
+    return (e: FormEvent) => {
       e.preventDefault();
       setIsSubmitted(true);
       handleValidate(formData, () => {
