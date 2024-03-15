@@ -23,7 +23,11 @@ interface UseFormProps<T> {
   validations?: Validations<T>;
 }
 
-const useForm = <T extends Record<string, any>>(props?: UseFormProps<T>) => {
+type DataType = string | number | boolean | object;
+
+const useForm = <T extends Record<string, DataType>>(
+  props?: UseFormProps<T>
+) => {
   const [formData, setFormData] = useState<T>((props?.defaultValue as T) || {});
   const [errors, setErrors] = useState<FormErrors<T>>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
