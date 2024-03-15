@@ -15,7 +15,7 @@ const LoginContainer = () => {
       username: (val) => {
         return {
           required: true,
-          message: "Need Username",
+          message: "Provide Username",
           // validate: () => {
           //   return false;
           // },
@@ -24,7 +24,7 @@ const LoginContainer = () => {
       password: (val) => {
         return {
           required: true,
-          message: "Need Password",
+          message: "Provide Password",
           // validate: () => {
           //   return false;
           // },
@@ -33,7 +33,7 @@ const LoginContainer = () => {
     },
   });
 
-  const handleLogin = (data:ILogin) => {
+  const handleLogin = (data: ILogin) => {
     console.log(data);
   };
 

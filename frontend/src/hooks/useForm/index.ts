@@ -56,8 +56,10 @@ const useForm = <T extends Record<string, DataType>>(
     setFormData(newData);
   };
 
-  const handleSubmit = (onSubmit: (data: T) => void) => {
-    return (e: FormEvent) => {
+  const handleSubmit = (
+    onSubmit: (data: T) => void
+  ): ((e: FormEvent) => void) => {
+    return (e) => {
       e.preventDefault();
       setIsSubmitted(true);
       handleValidate(formData, () => {
