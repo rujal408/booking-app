@@ -1,4 +1,4 @@
-import { FormErrors, Validations } from "@/hooks/useForm";
+import { FormErrors, Validations } from "@/hooks/useForm/useForm";
 
 function validate<T>(inputs: T, validations?: Validations<T>) {
   return new Promise((res, rej) => {

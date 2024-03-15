@@ -1,8 +1,8 @@
 "use client";
 
-import validate from "@/utils/validate";
 import { ChangeEvent, FormEvent, useState } from "react";
 import useSubscribe from "./useSubscribe";
+import validate from "./validate";
 
 export interface FormErrors {
   [key: string]: string;
