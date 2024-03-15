@@ -1,24 +1,28 @@
-import { FormErrors, Validations } from "@/hooks/useForm/useForm";
+import { FormErrors, Validations } from "@/hooks/useForm";
 
 function validate<T>(
   inputs: T,
   validations?: Validations<T>
 ): Promise<{ status: boolean; errors: FormErrors }> {
   return new Promise((res, rej) => {
+    let errors: FormErrors = {};
     if (validations) {
-      let errors: FormErrors = {};
       Object.keys(validations).forEach((validate) => {
         const fieldName = validate as keyof T;
         const value = inputs[fieldName];
         const validationCriteria = validations[fieldName](value);
         if (validationCriteria?.required) {
           if (!value) {
-            errors[fieldName as string] = validationCriteria?.message || "";
+            Object.assign(errors, {
+              [fieldName]: validationCriteria?.message || "",
+            });
           }
         } else if (validationCriteria?.validate) {
           const isValid = validationCriteria.validate();
           if (!isValid) {
-            errors[fieldName as string] = "";
+            Object.assign(errors, {
+              [fieldName]: "",
+            });
           }
         } else {
           if (errors[fieldName as string]) {
@@ -31,7 +35,7 @@ function validate<T>(
           : res({ status: true, errors });
       });
     } else {
-      res({ status: true, errors: {} });
+      res({ status: true, errors });
     }
   });
 }

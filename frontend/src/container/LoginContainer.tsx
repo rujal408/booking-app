@@ -1,6 +1,6 @@
 "use client";
 
-import useForm from "@/hooks/useForm/useForm";
+import useForm from "@/hooks/useForm";
 import React from "react";
 
 const LoginContainer = () => {
