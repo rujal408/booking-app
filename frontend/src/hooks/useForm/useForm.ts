@@ -32,13 +32,14 @@ const useForm = <T>(props?: UseFormProps<T>) => {
 
   const handleValidate = (data: any, call?: CallableFunction) =>
     validate<T>(data, props?.validations)
-      .then(() => {
+      .then((res) => {
+        setErrors(res.errors as FormErrors);
         if (call) {
           call();
         }
       })
       .catch((e) => {
-        setErrors(e as FormErrors);
+        setErrors(e.errors as FormErrors);
       });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

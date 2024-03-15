@@ -1,6 +1,9 @@
 import { FormErrors, Validations } from "@/hooks/useForm/useForm";
 
-function validate<T>(inputs: T, validations?: Validations<T>) {
+function validate<T>(
+  inputs: T,
+  validations?: Validations<T>
+): Promise<{ status: boolean; errors: FormErrors }> {
   return new Promise((res, rej) => {
     if (validations) {
       let errors: FormErrors = {};
@@ -12,19 +15,23 @@ function validate<T>(inputs: T, validations?: Validations<T>) {
           if (!value) {
             errors[fieldName as string] = validationCriteria?.message || "";
           }
-        }
-
-        if (validationCriteria?.validate) {
+        } else if (validationCriteria?.validate) {
           const isValid = validationCriteria.validate();
           if (!isValid) {
             errors[fieldName as string] = "";
           }
+        } else {
+          if (errors[fieldName as string]) {
+            delete errors[fieldName as string];
+          }
         }
 
-        Object.keys(errors).length > 0 ? rej(errors) : res(true);
+        Object.keys(errors).length > 0
+          ? rej({ status: false, errors })
+          : res({ status: true, errors });
       });
     } else {
-      res(true);
+      res({ status: true, errors: {} });
     }
   });
 }

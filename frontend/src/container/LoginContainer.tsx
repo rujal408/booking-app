@@ -12,7 +12,7 @@ const LoginContainer = () => {
     validations: {
       username: (val) => {
         return {
-          required: false,
+          required: true,
           message: "Need Username",
           // validate: () => {
           //   return false;
@@ -21,7 +21,7 @@ const LoginContainer = () => {
       },
       password: (val) => {
         return {
-          required: false,
+          required: true,
           message: "Need Password",
           // validate: () => {
           //   return false;
@@ -40,6 +40,7 @@ const LoginContainer = () => {
       <h3>Login Here</h3>
       <label>Username</label>
       <input name="username" onChange={handleChange} placeholder="Username" />
+      {errors && errors["username"]}
       <label>Password</label>
       <input
         name="password"
@@ -47,6 +48,7 @@ const LoginContainer = () => {
         type="password"
         placeholder="Password"
       />
+      {errors && errors["password"]}
       <button>Log In</button>
     </form>
   );
