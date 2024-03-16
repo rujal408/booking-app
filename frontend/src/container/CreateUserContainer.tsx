@@ -3,7 +3,7 @@
 import useForm from "@/hooks/useForm";
 import React from "react";
 
-const LoginContainer = () => {
+const CreateUserContainer = () => {
   const { handleChange, handleSubmit, ref, errors } = useForm({
     defaultValue: {
       name: "",
@@ -31,7 +31,9 @@ const LoginContainer = () => {
     },
   });
 
-  const onSubmit = (data: any) => {};
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <form ref={ref} onSubmit={handleSubmit(onSubmit)}>
@@ -43,6 +45,7 @@ const LoginContainer = () => {
         placeholder="name"
         onChange={handleChange}
       />
+      {errors && errors["name"]}
 
       <label>Username</label>
       <input
@@ -51,6 +54,7 @@ const LoginContainer = () => {
         placeholder="Username"
         onChange={handleChange}
       />
+      {errors && errors["username"]}
 
       <label>Email</label>
       <input
@@ -59,6 +63,7 @@ const LoginContainer = () => {
         placeholder="Email"
         onChange={handleChange}
       />
+      {errors && errors["email"]}
 
       <label>Password</label>
       <input
@@ -67,10 +72,11 @@ const LoginContainer = () => {
         placeholder="Password"
         onChange={handleChange}
       />
+      {errors && errors["password"]}
 
       <button>Log In</button>
     </form>
   );
 };
 
-export default LoginContainer;
+export default CreateUserContainer;
