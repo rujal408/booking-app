@@ -3,7 +3,11 @@
 import useForm from "@/hooks/useForm";
 import React from "react";
 
-const CreateUserContainer = () => {
+interface IProps {
+  handleSwitch: () => void;
+}
+
+const CreateUserContainer: React.FC<IProps> = ({ handleSwitch }) => {
   const { handleChange, handleSubmit, ref, errors } = useForm({
     defaultValue: {
       name: "",
@@ -73,6 +77,8 @@ const CreateUserContainer = () => {
         onChange={handleChange}
       />
       {errors && errors["password"]}
+
+      <span onClick={handleSwitch}>Login</span>
 
       <button>Log In</button>
     </form>

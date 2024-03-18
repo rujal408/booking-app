@@ -5,7 +5,11 @@ import React from "react";
 
 type ILogin = { username: string; password: string };
 
-const LoginContainer = () => {
+interface IProps {
+  handleSwitch: () => void;
+}
+
+const LoginContainer: React.FC<IProps> = ({ handleSwitch }) => {
   const { handleChange, handleSubmit, ref, errors } = useForm<ILogin>({
     defaultValue: {
       username: "",
@@ -47,6 +51,9 @@ const LoginContainer = () => {
         placeholder="Password"
       />
       {errors && errors["password"]}
+
+      <span onClick={handleSwitch}>Forgot Password?</span>
+
       <button>Log In</button>
     </form>
   );
