@@ -9,21 +9,41 @@ const useSubscribe = (
 
   useEffect(() => {
     const formInputs: any = {};
-    if (ref.current) {
-      Array.from(ref.current.elements).forEach((element) => {
-        switch (element.nodeName) {
-          case "INPUT": {
-            const el = element as HTMLInputElement;
-            if (!formData[el?.name]) {
-              formInputs[el?.name] = undefined;
-            }
+
+    const setDefaultValues = () => {
+      if (ref.current && ref.current.elements) {
+        Array.from(ref.current.elements).forEach((el) => {
+          const element = el as HTMLInputElement;
+          if (ref.current && ref.current[element.name]) {
+            ref.current[element.name].value = formData[element.name];
           }
-          default:
-            return;
-        }
-      });
+        });
+      }
+    };
+
+    const setInitialValues = () => {
+      if (ref.current) {
+        Array.from(ref.current.elements).forEach((element) => {
+          switch (element.nodeName) {
+            case "INPUT": {
+              const el = element as HTMLInputElement;
+              if (!formData[el?.name]) {
+                formInputs[el?.name] = undefined;
+              }
+            }
+            default:
+              return;
+          }
+        });
+      }
+      setFormData((th: any) => ({ ...th, ...formInputs }));
+    };
+
+    if (formData) {
+      setDefaultValues();
+    } else {
+      setInitialValues();
     }
-    setFormData((th: any) => ({ ...th, ...formInputs }));
   }, []);
 
   return ref;

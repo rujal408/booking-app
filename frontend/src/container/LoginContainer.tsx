@@ -12,8 +12,8 @@ interface IProps {
 const LoginContainer: React.FC<IProps> = ({ handleSwitch }) => {
   const { handleChange, handleSubmit, ref, errors } = useForm<ILogin>({
     defaultValue: {
-      username: "",
-      password: "",
+      username: "rujal",
+      password: "sdf",
     },
     validations: {
       username: {

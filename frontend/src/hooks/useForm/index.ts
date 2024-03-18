@@ -32,7 +32,7 @@ const useForm = <T extends Record<string, DataType>>(
   const [errors, setErrors] = useState<FormErrors<T>>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const ref = useSubscribe(props?.defaultValue || {}, setFormData);
+  const ref = useSubscribe(props?.defaultValue, setFormData);
 
   const handleValidate = (data: T, call?: CallableFunction) =>
     validate<T>(data, props?.validations)
