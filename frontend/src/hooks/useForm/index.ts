@@ -11,7 +11,10 @@ export type FormErrors<T> = {
 type ValidationFunction<T> = {
   required?: boolean;
   message?: string;
-  validate?: (value: T) => boolean;
+  validate?: (value: T) => {
+    requirement: boolean;
+    message: string;
+  };
 };
 
 export type Validations<T> = {

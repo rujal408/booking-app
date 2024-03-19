@@ -20,9 +20,9 @@ function validate<T>(
             }
           } else if (validationCriteria?.validate) {
             const isValid = validationCriteria.validate(inputs[fieldName]);
-            if (!isValid) {
+            if (!isValid.requirement) {
               Object.assign(errors, {
-                [fieldName]: "",
+                [fieldName]: isValid.message,
               });
             }
           } else {

@@ -12,16 +12,17 @@ interface IProps {
 const LoginContainer: React.FC<IProps> = ({ handleSwitch }) => {
   const { handleChange, handleSubmit, ref, errors } = useForm<ILogin>({
     defaultValue: {
-      username: "rujal",
-      password: "sdf",
+      username: "",
+      password: "",
     },
     validations: {
       username: {
-        required: true,
-        message: "Provide Username",
-        // validate: (val) => {
-        //   return false;
-        // },
+        // required: true,
+        // message: "Provide Username",
+        validate: (value) => ({
+          requirement: value.length > 4,
+          message: "Length should be greater than 4",
+        }),
       },
       password: {
         required: true,
